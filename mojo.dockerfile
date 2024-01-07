@@ -28,6 +28,8 @@ WORKDIR /home/mojician
 RUN modular auth ${MODULAR_AUTH_KEY} \
     && modular install mojo
 
+RUN mkdir -p ${HOME}/.local/bin
+
 RUN BASHRC=$( [ -f "$HOME/.bash_profile" ] && echo "$HOME/.bash_profile" || echo "$HOME/.bashrc" ) \
     && echo 'export MODULAR_HOME="/home/mojician/.modular"' >> "$BASHRC" \
-    && echo 'export PATH="/home/mojician/.modular/pkg/packages.modular.com_mojo/bin:$PATH"' >> "$BASHRC"
+    && echo 'export PATH="/home/mojician/.modular/pkg/packages.modular.com_mojo/bin:$PATH:$HOME/.local/bin"' >> "$BASHRC"
